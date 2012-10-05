@@ -16,10 +16,11 @@
 //@include h5bp-lists;
 @include h5bp-helpers;
 
-@import "compass/layout";
+//@import "compass/layout";
 @import "compass/css3";
-@import "compass/typography";
-@import "compass/utilities";
+//@import "compass/typography";
+@import "compass/typography/links/link-colors";
+@import "compass/utilities/general/clearfix";
 
 
 
@@ -691,6 +692,7 @@ button{border:none;@include single-transition(all,.4s,ease,0s);}
   margin-left: 30px;
   width:210px;
   line-height: 1.2;
+  font-family: $servFont;
 }
   .b-copy__holder{display: block;margin-bottom: 10px;}
   .b-copy__creator{
@@ -706,6 +708,7 @@ button{border:none;@include single-transition(all,.4s,ease,0s);}
   padding-top: 10px;
   float: left;
   margin-left: 40px;
+  font-family: $servFont;
   li{margin-bottom: 4px;}
 }
   .b-footerShopInfo__social{@include hList;margin-top: 7px;margin-bottom: 0;}
