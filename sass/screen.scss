@@ -1,0 +1,1202 @@
+@charset "utf-8";
+@import "compass/reset";
+
+@import "h5bp";
+@include h5bp-display;
+@include h5bp-selection;
+@include h5bp-chromeframe;
+@include h5bp-media;
+@include h5bp-base;
+@include h5bp-typography;
+@include h5bp-figures;
+@include h5bp-forms;
+@include h5bp-embeds;
+@include h5bp-tables;
+//@include h5bp-links;
+//@include h5bp-lists;
+@include h5bp-helpers;
+
+@import "compass/layout";
+@import "compass/css3";
+@import "compass/typography";
+@import "compass/utilities";
+
+
+
+//border-box-sizing for all elems
+*{@include box-sizing(border-box);}
+input[type=search]{@include box-sizing(border-box);}
+
+//@font-face {
+//  font-family: 'galscregular';
+//  src: url('../fonts/galsc-webfont.eot');
+//  src: url('../fonts/galsc-webfont.eot?#iefix') format('embedded-opentype'),
+//  url('../fonts/galsc-webfont.woff') format('woff'),
+//  url('../fonts/galsc-webfont.ttf') format('truetype'),
+//  url('../fonts/galsc-webfont.svg#galscregular') format('svg');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+//@font-face {
+//  font-family: 'galscbold';
+//  src: url('../fonts/galsc-bold-webfont.eot');
+//  src: url('../fonts/galsc-bold-webfont.eot?#iefix') format('embedded-opentype'),
+//  url('../fonts/galsc-bold-webfont.woff') format('woff'),
+//  url('../fonts/galsc-bold-webfont.ttf') format('truetype'),
+//  url('../fonts/galsc-bold-webfont.svg#galscbold') format('svg');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+//@font-face {
+//  font-family: 'galscbold_italic';
+//  src: url('../galsc-bolditalic-webfont.eot');
+//  src: url('../galsc-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+//  url('../galsc-bolditalic-webfont.woff') format('woff'),
+//  url('../galsc-bolditalic-webfont.ttf') format('truetype'),
+//  url('../galsc-bolditalic-webfont.svg#galscbold_italic') format('svg');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+//@font-face {
+//  font-family: 'galscitalic';
+//  src: url('../galsc-italic-webfont.eot');
+//  src: url('../galsc-italic-webfont.eot?#iefix') format('embedded-opentype'),
+//  url('../galsc-italic-webfont.woff') format('woff'),
+//  url('../galsc-italic-webfont.ttf') format('truetype'),
+//  url('../galsc-italic-webfont.svg#galscitalic') format('svg');
+//  font-weight: normal;
+//  font-style: normal;
+//}
+@each $font-face in
+galsc-webfont,
+galsc-bold-webfont,
+galsc-bolditalic-webfont,
+galsc-italic-webfont{
+ @font-face {
+   font-family: $font-face; font-style: normal; font-weight: normal;
+   src: url('../fonts/#{$font-face}.eot');
+   src: url('../fonts/#{$font-face}.eot?#iefix') format('embedded-opentype'),
+   url('../fonts/#{$font-face}.woff') format('woff'),
+   url('../fonts/#{$font-face}.ttf')  format('truetype');
+ }
+}
+/*VARIABLES
+--------------------------------------------*/
+//set liks color here
+$linkDefaultColor:#009fd1;
+$linkVisitedColor:#6dc6e7;
+$linkHoverColor:#ff6f00;
+$linkFocusedColor:#ff6f00;
+$linkActiveColor:#ff6000;
+//base font params--------------------
+$baseFontColor: #222;
+$baseFontSize:14px;
+$baseLineHeight: 1.4;
+$servFont: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+//other fonts
+$baseFont: 'galsc-webfont', "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+$baseFontBold: 'galsc-bold-webfont', "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+$baseFontItalic: 'galsc-bolditalic-webfont', "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+$baseFontBoldItalic: 'galsc-italic-webfont', "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+//colors
+$servColor:#009fd1;
+$attentColor:#ff6f00;
+$timeColor:#878787;
+$hdrColor:#444;
+//layout params-----------------------
+$baseWidth: 1000px;
+$hdrHeight:230px;
+$ftrHeight:145px;
+
+//spriting
+@import "sprites/icons/*.png";
+
+/*MAIN LAYOUT
+---------------------------------------------------------*/
+@mixin layout{
+  .l-baseWrap{
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto;
+    width: $baseWidth;
+    .ie7 &{width: $baseWidth - 40;}
+    padding: 0 20px;
+    //@include container;
+    //@include susy-grid-background;
+  }
+  .l-baseHeader {
+    @include pie-clearfix;
+    height: $hdrHeight;
+    padding-top: 15px;
+    .ie7 &{height: $hdrHeight - 15;}
+    position: relative;
+  }
+  .l-contentWrap{
+    padding-bottom: $ftrHeight * 1.5 !important;
+    @include pie-clearfix;
+  }
+  .l-baseFooter{
+    position: relative;
+    height: $ftrHeight;
+    margin: -$ftrHeight auto 0;
+    width: $baseWidth;
+    padding: 0 20px;
+    .ie7 &{width: $baseWidth - 40;}
+    //@include container;
+    //@include susy-grid-background;
+  }
+}
+/*HELPER CLASSES
+---------------------------------------------------------*/
+//hack for ie9 - need for gradient backgrounds
+:root .gradient {filter: none \0/IE9; }
+
+//pseudo elems mixin
+@mixin pseudoBlockAbs{
+  content: '';
+  display: block;
+  position: absolute;
+}
+//vertical centering mixin
+@mixin vCtr{
+  display: table-cell;
+  height: inherit;
+  vertical-align: middle;
+}
+//for horisontal layouts
+@mixin hList{
+  .flexbox &{@include display-box;}
+  .no-flexbox & > *{
+    @include inline-block;
+    vertical-align: top;
+  }
+}
+//img wrapper
+@mixin imgWrap{
+  img{width:100%;height: 100%;}
+}
+
+@mixin ie9-gradient-support{
+  $experimental-support-for-svg: true;
+  @extend .gradient;
+}
+/*OBJECTS mixins
+--------------------------------------------*/
+
+//headers
+@mixin h1{
+  font-size: 2.214em;
+  color:$hdrColor;
+  text-transform: uppercase;
+}
+@mixin h2{
+  //line-height: 2.571em;
+  text-transform: uppercase;
+  color:$hdrColor;
+}
+@mixin h3{
+  line-height: 1.429em;
+  color:#d41e00;
+}
+@mixin ul{
+  margin:10px 0;
+  li{
+    position: relative;
+    margin:5px 0;
+    padding-left: 20px;
+    &:before{
+      content: '✔';
+      color:$attentColor;
+      position: absolute;
+      left:0;
+    }
+  }
+}
+@mixin servText{font-size: 0.857em;color: $timeColor;}
+@mixin link-only_white_color{@include link-colors(#fff,#fff,#fff,#fff,#fff);}
+@mixin link-only_attention_color{@include link-colors($attentColor,$attentColor,$attentColor,$attentColor,$attentColor);}
+//black colored link with orange hover effect
+@mixin link-colors-alternate{@include link-colors($hdrColor, $linkHoverColor, $baseFontColor, $hdrColor, $linkHoverColor);}
+//gradients
+@mixin attention-color-gradient{
+  background-color: #F56610;
+  @include filter-gradient(#f56610, #ff7f01, vertical);
+  @include ie9-gradient-support;
+  @include background-image(linear-gradient(bottom, #f56610, #ff7f01));
+}
+//button with 3 stages
+@mixin button{
+  font-size: 1.5em;
+  @include link-only_white_color;
+  text-transform: uppercase;
+  @include border-radius(5px);
+  @include box-shadow(0 1px rgba(255,128,4,.75));
+  @include attention-color-gradient;
+  text-decoration: none;
+  position: relative;
+  padding:10px 30px;
+  text-shadow: 0 1px rgba(154,46,11,.75);
+  &:before{
+    @include pseudoBlockAbs;
+    @include border-radius(5px);
+    background-color: #d14f00;
+    @include box-shadow(0 3px 5px #d87339);
+    border-bottom: 1px solid #9d320c;
+    height: 100%;
+    width:100%;
+    bottom:-6px;
+    left:0;
+    z-index: -1;
+    @include  single-transition(all,.4s,ease,0s);
+  }
+  &:hover, &:focus{
+    outline: none;
+    @include ie9-gradient-support;
+    @include filter-gradient(#fb6a00, #ffb401, vertical);
+    @include background-image(linear-gradient(bottom, #fb6a00, #ffb401));
+  }
+  &:active{
+    @include box-shadow(0 1px #9d320c);
+    background-color: #d14f00;
+    position: relative;
+    top:3px;
+    @include filter-gradient(#d14f00, #d14f00, vertical);
+    @include background-image(none);
+    &:before{bottom:-1px; box-shadow: none;}
+  }
+}
+.u-standartBtn{@include button;}
+//simply button with orange gradient
+@mixin attentionBtn{
+  @include attention-color-gradient;
+  @include border-radius(7px);
+  color:#fff;
+}
+//main Navigation bar gradient styles
+.u-attentionBtn{@include attentionBtn;}
+@mixin service-color-grad{
+  @include border-radius(7px);
+  background-color: #00acdc;
+  @include filter-gradient(#009fd1, #00c7f3, vertical);
+  @include ie9-gradient-support;
+  @include background-image(linear-gradient(bottom, #009fd1, #00c7f3));
+}
+//content editing zone styles
+@mixin customCss{
+  h1{@include h1;}
+  h2{@include h2;margin:15px 0;}
+  h3{@include h3;margin:25px 0 5px;}
+  ul{@include ul;}
+}
+.m-customCss{@include customCss;}
+
+.u-attentionColor{color:#ff6f00;}
+
+@mixin standartProduct{
+  width:150px;
+  @include inline-block;
+  text-align: center;
+  padding-bottom: 25px;
+  margin: 15px 16px;
+  position: relative;
+  &:before{
+    @include pseudoBlockAbs;
+    @include icons-sprite(cart-1);
+    width: 17px; height: 16px;
+    bottom:0;
+    left:50%;
+    margin-left: -9px;
+  }
+  &.m-addedToCart:before{@include icons-sprite(cart-2);}
+}
+  @mixin standartProduct__price{font-size: 1.286em;display: block;text-align: center;}
+/*LAYOUT
+----------------------------------------------------------*/
+html, button, input, select, textarea {
+  height: 100%;
+  font-family: $baseFont;
+  color: $baseFontColor;
+}
+body {
+  height: 100%;
+  font-size: $baseFontSize;
+  line-height: $baseLineHeight;
+  @include layout;
+  background: #fff;
+}
+a {
+  @include link-colors($linkDefaultColor, $linkHoverColor, $linkActiveColor, $linkVisitedColor, $linkFocusedColor);
+  @include single-transition(all,.4s,ease,0s);
+  text-decoration: underline;
+  //&.current{color:$linkHoverColor;}
+}
+b,strong{
+  font-family: $baseFontBold;
+  em{font-family: $baseFontBoldItalic;}
+}
+em{
+  font-family: $baseFontItalic;
+  b, strong{font-family: $baseFontBoldItalic;}
+}
+
+input[type=number]{width:60px;}
+input, textarea{
+  border:1px solid #bbb;
+  border-top-color: #999;
+  border-bottom-color: #e9e9e9;
+}
+button{border:none;@include single-transition(all,.4s,ease,0s);}
+/* page header elems styles
+----------------------------------*/
+//b-mainLogo
+.b-mainLogo{
+  font: 3em $attentColor;
+  float: left;
+  margin: 5px 30px 0;
+  position: relative;
+  &:before{
+    @include pseudoBlockAbs;
+    @include icons-sprite(bg-slogan);
+    width:48px; height: 18px;
+    bottom:0;
+    right:-40px;
+  }
+  &.m-noSlogan:before{display: none;}
+}
+//b-user
+.b-user{
+  float: right;
+  text-transform: uppercase;
+  padding-left: 23px;
+}
+  //login link
+  .b-user__loginLink{
+    position: relative;
+    text-decoration: none;
+    display: block;
+    &:before{
+      @include pseudoBlockAbs;
+      left:-23px;
+      width:16px; height: 16px;
+    }
+    &.m-login_off:before{@include icons-sprite(user-1);}
+    &.m-login_on:before{@include icons-sprite(user-2);height: 12px;}
+  }
+  //shopping cart link
+  .b-user__shopCartLink{
+    text-decoration: none;
+    margin-top: 15px;
+    position: relative;
+    display: block;
+    @include link-only_attention_color;
+    &:before{
+      @include pseudoBlockAbs;
+      @include icons-sprite(cart-2);
+      width:17px; height: 16px;
+      left:-23px;
+    }
+  }
+//b-info
+.b-info{overflow: hidden;}
+  .b-info__navList{@include hList;margin-bottom: 10px;}
+  .b-info__navLink{
+    text-transform: uppercase;
+    border-bottom: 1px solid #d0d0d0;
+    display: block;
+    margin-right: 20px;
+    text-decoration: none;
+    @include link-colors($hdrColor, $linkHoverColor, $baseFontColor, $hdrColor, $linkHoverColor);
+  }
+  .b-info__slogan{
+    display: block;
+    float: left;
+    font: italic 0.857em $servFont;
+    color:$hdrColor;
+    padding-top: 5px;
+  }
+  .b-info__phone{
+    float: right;
+    margin-right: 121px;
+    font-size: 1.286em;
+    color:$attentColor;
+  }
+
+//main navigation
+.b-mainNav{
+  margin:25px 0 20px;
+  clear: both;
+  position: relative;
+  height: 50px;
+  @include service-color-grad;
+  &:before{
+    @include pseudoBlockAbs;
+    width:100%;
+    height: 100%;
+    @include border-radius(7px);
+    background-color: #007ea2;
+    @include box-shadow(0 1px rgba(0,106,136,.75));
+    z-index: -1;
+    bottom:-6px;
+  }
+  &:after{
+    @include pseudoBlockAbs;
+    width:960px;
+    height:22px;
+    background: url(../images/bg-mainNav-b.png) 0 0 no-repeat;
+    bottom:-20px;
+    z-index: -2;
+    left:2px;
+  }
+  .ie8 &{
+    &:before{
+      display: none;
+    }
+  }
+}
+  .b-mainNav__list{
+    @include hList;padding-left: 15px;
+    >li{position: relative;}
+  }
+    .b-mainNav__link{
+      text-decoration: none;
+      display: block;
+      @include link-only_white_color;
+      padding: 0 15px;
+      height: 51px;
+      position: relative;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 50px;
+      text-shadow: 0 1px rgba(0,115,151,.75);
+      position: relative;
+      &:before{
+        @include pseudoBlockAbs;
+        @include icons-sprite(mainNav-divider);
+        width:2px;
+        height: 39px;
+        right:-1px;
+        top:50%;
+        margin-top: -20px;
+        li:last-child &{display: none;}
+      }
+      li:hover &{
+        position: relative;
+        top:-5px;
+        padding-top: 5px;
+        height: 65px;
+        @include border-radius(7px);
+        background-color: #fff;
+        @include box-shadow(0 4px 15px rgba(88,142,160,.75));
+        color:$servColor;
+      }
+      li &.m-active{
+        background-color: #007ea2;
+        padding-top: 0;
+        height: 51px;
+        position: static;
+        @include border-radius(0px);
+        @include link-only_white_color;
+        @include box-shadow(inset 0 2px 5px rgba(2,2,2,.45));
+        &:before{
+          @include pseudoBlockAbs;
+          width:100%;
+          height: 6px;
+          background: #005c76;
+          top:100%;
+          left:0;
+          margin-top: -1px;
+          li:last-child &{display: block;}
+          .ie8 &{display: none;}
+        }
+      }
+    }
+
+  .b-mainNav__search{
+    position: absolute;
+    right:25px;
+    top:50%;
+    margin-top: -13px;
+  }
+    .b-mainNav__search__input{
+      width: 152px;
+      padding: 0 10px 0 30px;
+      .ie7 &{width: 152px -40;}
+      height: 26px;
+      @include border-radius(13px);
+      background-color: #fff;
+      border: solid 1px #00a6d7;
+      @include  single-transition(all,.4s,ease,0s);
+      &:active,&:focus{
+        outline: none;
+        box-shadow: 0 0 10px #007ea2;
+      }
+    }
+    .b-mainNav__search__button{
+      width:14px;
+      height: 18px;
+      @include icons-sprite(search);
+      position: absolute;
+      left:13px;
+      top:50%;
+      margin-top: -9px;
+      border: none;
+    }
+
+.b-mainNav__list>li {
+  position: relative;
+  &:hover{
+    .b-mainNav__link{
+
+    }
+    .b-mainNav__sub{
+      //left:0;
+      display: block;
+      opacity: 1;
+    }
+  }
+}
+
+
+
+
+.b-mainNav__sub {
+  //left: -9999px;
+  top: 50px; left: 0;
+  display: none;
+  position: absolute;
+  z-index: 10;
+  opacity: 0;
+  @include single-transition(all,.5s,ease,0s);
+  width:550px;
+  padding:30px 0 30px 30px;
+  @include border-radius(7px);
+  background-color: #fff;
+  @include box-shadow(0 8px 15px rgba(88,142,160,.75));
+}
+.sub__brands__list{
+  .csscolumns &{
+    @include columns(150px 3);
+  }
+  li{margin:5px 0;}
+  a{
+    @include h2;
+    @include link-colors-alternate;
+    text-decoration: none;
+    line-height: 1.2;
+    border-bottom: 1px solid $timeColor;
+    &:hover{border-bottom-color: $linkHoverColor;}
+  }
+}
+.sub__products{
+  margin-top:25px;
+  @include hList;
+  .flexbox &{@include box-pack(justify);}
+}
+.sub__products__item{
+  vertical-align: top;
+  width:160px;
+  img{display: block;width:110px;height: 110px;}
+  font-size: 0.857em;
+}
+//.sub__products__item+.sub__products__item{margin-left: 40px;}
+.sub__products__price{
+  height: $hdrColor;
+  display: block;
+  margin:5px 0;
+}
+
+
+//promo buttons (under Main Nav)
+.b-promoBtn__wrap{@include pie-clearfix;}
+  .b-promoBtn__l{
+    text-decoration: none;
+    display: block;
+    float: left;
+    width: 511px;
+    padding-left: 75px;
+    .ie7 &{width: 511px - 75;}
+    @include attentionBtn;
+    position: relative;
+    height: 55px;
+    @include link-only_white_color;
+    line-height: 55px;
+    text-transform: uppercase;
+    &:before{
+      @include pseudoBlockAbs;
+      @include icons-sprite(btn-1);
+      width:30px;height: 30px;
+      left:30px;
+      top:50%;
+      margin-top: -15px;
+    }
+  }
+  .b-promoBtn__r{
+    text-decoration: none;
+    float: right;
+    display: block;
+    width: 438px;
+    padding-left: 65px;
+    .ie7 &{width: 438px - 65;}
+    height: 55px;
+    @include border-radius(7px);
+    background-color: #fff;
+    border: solid 1px #dadada;
+    @include background-image(linear-gradient(bottom, #e7e7e7, rgba(255,255,255,0)));
+    line-height: 55px;
+    text-transform: uppercase;
+    @include link-colors-alternate;
+    position: relative;
+    &:before{
+      @include pseudoBlockAbs;
+      @include icons-sprite(btn-2);
+      width:28px;
+      height: 26px;
+      left:25px;
+      top:50%;
+      margin-top: -13px;
+    }
+  }
+/* page content
+------------------------------------*/
+.l-contentWrap {@include pie-clearfix;}
+//breadcrumbs
+.b-breadcrumbs{margin-left: 30px;}
+  .b-breadcrumbs__list{@include hList;}
+    .b-breadcrumbs__link{
+      display: block;
+      position: relative;
+      margin-right: 5px;
+      padding-right: 20px;
+      text-decoration: underline;
+      &:before{
+        content: '→';
+        color: $timeColor;
+        position: absolute;
+        right:0;
+        li:last-child &{display: none;}
+      }
+    }
+//page TITLE
+.b-pageTitle{@include h1;margin-left: 30px;}
+
+/* Footer
+------------------------------------*/
+.baseFooter {@include pie-clearfix;}
+//copyrights
+.b-copy{
+  padding-top: 10px;
+  color:$hdrColor;
+  float: left;
+  margin-left: 30px;
+  width:210px;
+  line-height: 1.2;
+}
+  .b-copy__holder{display: block;margin-bottom: 10px;}
+  .b-copy__creator{
+    @include icons-sprite(copy);
+    display: block;
+    height: 34px;
+    padding-left: 50px;
+    a{white-space: nowrap;}
+    sup{font-size: 0.786em;}
+  }
+//footer shop info
+.b-footerShopInfo{
+  padding-top: 10px;
+  float: left;
+  margin-left: 40px;
+  li{margin-bottom: 4px;}
+}
+  .b-footerShopInfo__social{@include hList;margin-top: 7px;margin-bottom: 0;}
+    .b-footerShopInfo__social__item{
+      width: 24px; height: 24px;
+      margin-right: 10px;
+      &.item-1{@include icons-sprite(soc-1);}
+      &.item-2{@include icons-sprite(soc-2);}
+      &.item-3{@include icons-sprite(soc-3);width:26px; height: 22px;}
+    }
+//radnom product
+.b-randomProduct{
+  padding-top: 10px;
+  float: right;
+  margin-right: 30px;
+  height: $ftrHeight;
+  position: relative;
+  padding-left: 155px;
+}
+  .b-randomProduct__item{position: absolute;left:0;bottom:0;}
+  .b-randomProduct__info{width:190px;}
+    .b-randomProduct__title{
+      text-transform: uppercase;
+      color:$hdrColor;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .b-randomProduct__name{display: block;}
+    .b-randomProduct__description{color:$timeColor; font-size: 0.857em;display: block;margin: 5px 0;}
+    .b-randomProduct__price{font-size: 1.5em;color:$hdrColor;margin:10px 0;}
+/*main page specific elements styles
+-----------------------------------------------------------------------------------------------*/
+$indexSlider__height:285px;
+.slider{
+  position: relative;
+  overflow: hidden;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  @include border-radius(7px);
+  border: solid 1px #dadada;
+  background-color: #fff;
+  .slider__viewport{
+    height: $indexSlider__height;
+    width:100%;
+    float:left;
+    clear:both;
+    position:relative;
+    overflow:hidden;
+  }
+  .slider__item{
+    position: absolute;
+    width:100%;
+    height: $indexSlider__height;
+    background: #fff;
+  }
+  .slider__image{float: right;}
+  .sliderBullets{
+    z-index: 100;
+    position: absolute;
+    bottom:10px;
+    left:30px;
+    margin-left: 0;
+    a{
+      display: block;
+      margin-right: 3px;
+      float: left;
+      text-indent: -9999px;
+      width: 9px;
+      height: 9px;
+      @include border-radius(50%);
+      background-color: #d5d5d5;
+      @include box-shadow(inset 0 1px 2px rgba(0,0,0,.35));
+      @include filter-gradient(#d5d5d5, #ebebeb, vertical);
+      @include ie9-gradient-support;
+      @include background-image(linear-gradient(top, #d5d5d5, #ebebeb));
+    }
+    .active{
+      box-shadow: none;
+      background-color: #ff6f00;
+      @include background-image(linear-gradient(bottom, #f56610, #ff7f01));
+    }
+  }
+
+  .slider__content{
+    @include customCss;
+    height: $indexSlider__height !important;
+    @include vCtr;
+    padding-left: 30px;
+    h1{line-height: $baseLineHeight;}
+    h2{line-height: 1;}
+  }
+  .slider__recommended{
+    //padding: 10px;
+    @include attentionBtn;
+    @include pie-clearfix;
+    @include vCtr;
+    height: 45px;
+  }
+  .slider__recommended__title{
+    padding: 0 15px;
+    float: left;
+    font: 0.857em/1.2;
+    span{display: block;}
+    position: relative;
+    &:before{
+      @include pseudoBlockAbs;
+      background: url(../images/b-recommended__divider.png);
+      width:2px; height: 42px;
+      right:-1px;
+      top:50%;
+      margin-top: -21px;
+    }
+  }
+  .slider__recommended__price{
+    font-size: 1.5em;
+    float: right;
+    padding:0 15px;
+  }
+}
+
+//index Products Gallery
+.b-indexProducts{margin:30px 0;}
+  .b-indexProducts__title{}
+    .b-indexProducts__categoryLink{
+      @include inline-block;
+      @include link-colors-alternate;
+      text-transform: uppercase;
+      text-decoration: none;
+      margin:0 30px;
+      padding:10px 0;
+      border-bottom: 1px dotted $hdrColor;
+      &:hover, &:focus{border-bottom-color: $linkHoverColor;}
+      &.m-active{
+        @include service-color-grad;
+        padding:10px 30px;
+        margin: 0;
+        border-bottom: none;
+        @include link-only_white_color;
+      }
+    }
+  .b-indexProducts__content{padding: 0 15px;}
+    .b-indexProducts__item{@include standartProduct;}
+      .b-indexProducts__item__price{@include standartProduct__price;}
+      .b-indexProduct__viewAllLink{
+        @include inline-block;
+        width: 150px;
+        text-transform: uppercase;
+        @include link-only_attention_color;
+        text-decoration: underline;
+        padding:10px;
+        @include border-radius;
+        border: solid 1px #ff6f00;
+        margin:0 16px;
+        .ie7 &{margin: 100px 14px 0;vertical-align: top;}
+      }
+// seo text on index
+.b-indexSeoText{color:$timeColor;margin:30px;}
+//news block
+.b-indexNews{
+  width:250px;
+  float: left;
+  margin-left: 30px;
+}
+  .b-indexNews__title{
+    text-transform: uppercase;
+    color:$hdrColor;
+    margin:10px 0;
+  }
+  .b-indexNews__item{margin:15px 0;}
+    .b-indexNews__item__title{display: block;}
+    .b-indexNews__item__time{font-size: 0.857em; color: $timeColor;}
+  .b-indexNews__viewAllNews{
+    @include link-only_attention_color;
+    display: block;
+    margin-top: 20px;
+    text-decoration: underline;
+  }
+//video block
+.b-indexVideo{
+  @include pie-clearfix;
+  float:right;
+  margin-right: 30px;
+}
+  .b-indexVideo__content{@include inline-block;vertical-align: top;}
+  .b-indexVideo__contentDescription{
+    @include inline-block;
+    vertical-align: top;
+    width:215px;
+    margin-left: 20px;
+  }
+    .b-indexVideo__contentDescription__title{
+      font-size: 1.5em;
+      margin-top: -5px;
+      color:$hdrColor;
+    }
+  .b-indexVideo__contentDescription__link{display: block;}
+/*SHOP CART PAGE specific elements styles
+------------------------------------------------------------------------------------------------*/
+.b-shopcart__wrap{
+  border: solid 1px #dadada;
+  @include border-radius;
+  margin: 15px 0;
+}
+.b-shopcart{width:100%;}
+  .b-shopcart__header{}
+    .b-shopcart__title{@include h2;padding-top: 25px;}
+  .b-shopcart__product{
+    td{padding-top: 25px;}
+    &:last-child td{padding-bottom: 25px;}
+  }
+    .b-shopcart__product__image{
+      width:100px;
+      padding-right:40px;
+      padding-left: 30px;
+      .ie7 &{width:30px;}
+    }
+    .b-shopcart__product__info{padding-right: 40px;}
+      .b-shopcart__product__info__link{display: block;margin-bottom: 5px;}
+      .b-shopcart__product__info__text{@include servText;}
+    .b-shopcart__product__counter{}
+      .b-shopcart__product__counter__item{
+        display: block;
+        width:60px; height: 30px;
+        margin-left: auto;
+        padding-left: 5px;
+        color:$hdrColor;
+      }
+    .b-shopcart__product__price{
+      width:140px;
+      color:$hdrColor;
+      font-size: 1.286em;
+      text-align: right;
+    }
+    .b-shopcart__product__delete{width:80px;}
+      .b-shopcart__product__delete__item{
+        display: block;
+        margin:0 auto;
+        width: 22px;
+        height: 22px;
+        line-height: 19px;
+        @include border-radius(50%);
+        background-color: #dbdbdb;
+        @include attention-color-gradient;
+        font-weight: bold;
+        font-size: 1.286em;
+        @include link-only_white_color;
+        text-decoration: none;
+        text-align: center;
+      }
+//shopcart total
+.b-shopcart__total{
+  margin:25px 75px;
+  text-align: right;
+}
+  .b-shopcart__total__title{
+    color: $hdrColor;
+    text-transform: uppercase;
+    font-size: 1.5em;
+  }
+    .b-shopcart__total__counter{
+      text-transform: none;
+      color: $attentColor;
+      padding-left: 10px;
+    }
+  .b-shopcart__total__purchase{
+    margin:25px 0;
+    a{@include button;}
+  }
+  .b-shopcart__total__text{color: $hdrColor;}
+/*CABINET personal  specific elements styles
+------------------------------------------------------------------------------------------------*/
+.infoSettings{margin:15px 0;}
+  .infoSettings__wrap{
+    border: solid 1px #dadada;
+    @include border-radius;
+    margin: 15px 0;
+    padding:25px 30px;
+  }
+    .infoSettings__item{display: block;margin:10px 0;position: relative;padding-left: 200px;}
+      .infoSittings__item__title{@include h2;position: absolute;left:0;line-height: 30px;}
+      .infoSettings__item__input{width:370px; height: 30px;}
+      .infoSettings__password__info{display: block;@include servText;}
+    .infoSettings__submitBtn{
+      @include button;
+      position: relative;
+      left:230px;
+    }
+/*CATALOG page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.catalog{margin:15px 0;}
+  .catalog__brands{
+    border: solid 1px #dadada;
+    @include border-radius;
+    padding:10px 30px 10px 30px;
+  }
+    .catalog__brands__list {
+      text-align: justify;
+      li{@include inline-block;margin:5px 0;}
+    }
+      .catalog__brands__item{
+        text-decoration: none;
+        border-bottom: 1px solid $timeColor;
+        @include h2;
+        line-height: 1;
+        @include link-colors-alternate;
+      }
+
+  .catalog__content{text-align: justify;}
+  .catalog__content__sorting{padding:20px 30px 10px;@include h2;}
+  .catalog__content__sorting__link{text-transform: none;padding-left: 10px;}
+  .catalog__item{@include standartProduct;margin-top: 30px;margin-bottom: 30px;}
+  .catalog__item__name{}
+  .catalog__item__price{@include standartProduct__price;}
+
+//pagination
+.pagination{margin:50px 0 50px 25px;}
+.pagination__title{@include h2;margin:10px 0;}
+.pagination__list{@include hList;}
+  .pagination__link{
+    display: block;
+    width: 33px;
+    height: 32px;
+    @include border-radius(4px);
+    background-color: #fff;
+    border: solid 1px #dadada;
+    @include filter-gradient(#e7e7e7, #fff, vertical);
+    @include ie9-gradient-support;
+    @include background-image(linear-gradient(bottom, #e7e7e7, rgba(255,255,255,0)));
+    line-height: 32px;
+    text-decoration: none;
+    text-align: center;
+    margin-right: 10px;
+    &.m-active{
+      background-color: $attentColor;
+      @include box-shadow(inset 0 3px 5px rgba(2,2,2,.33));
+      @include filter-gradient(#f56610, #ff7f01, vertical);
+      @include background-image(linear-gradient(top, #f56610, #ff7f01));
+      @include link-only_white_color;
+    }
+  }
+/*PRODUCT page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.product{@include pie-clearfix;}
+/*structure
+*/
+.l-product__column-lt{float:left;}
+.l-product__column-ctr{float: left;width:180px;}
+.l-product__column-rt{float: right;width:230px;}
+/*big images
+*/
+.product__detailImage{
+  position: relative;
+  width:440px;height: 440px;
+  border:1px solid $timeColor;
+  margin: 0 60px 0 30px;
+  overflow: hidden;
+  .item{
+    position: absolute;
+    width:100%; height: 100%;
+    &.m-active{z-index: 100;}
+    visibility: hidden;
+    visibility: visible;
+  }
+}
+
+/*thumbs
+*/
+.product__thumbImage{
+  position: relative;
+  @include pie-clearfix;
+}
+.product__thumbImage__item{
+  cursor: pointer;
+  float: left;
+  display: block;
+  @include border-radius(4px);
+  overflow: hidden;
+  margin:10px 10px 10px 0;
+  border: solid 1px #dadada;
+  &.m-active, &:hover{border-color: $attentColor;}
+
+}
+.product__info{}
+.product__info__title{@include h2;margin:10px 0;}
+.product__info__list{
+  @include ul;width:175px;
+  >li{margin:5px 0;}
+}
+.product__info__more{text-transform: uppercase;display: block;margin:20px 0;}
+.product__price{color:$hdrColor;font-size: 2.214em;}
+.product__purchase{
+  @include border-radius;
+  border: solid 1px #dadada;
+  text-align: center;
+}
+.product__purchase__link{
+  margin:0 25px 20px;
+  display: block;
+  @include button;
+}
+.product__aviability{margin:10px 60px 10px 25px;}
+.product__aviability__title{@include h2;}
+.product__aviability__item{
+  position: relative;
+  padding-left:17px;
+  margin:10px 0;
+  &:before{
+    @include pseudoBlockAbs;
+    left:0;
+    top:5px;
+    width: 9px;
+    height: 9px;
+    @include border-radius(50%);
+    background-color: #ff6f00;
+    @include filter-gradient(#f56610, #ff7f01, vertical);
+    @include ie9-gradient-support;
+    @include background-image(linear-gradient(bottom, #f56610, #ff7f01));
+  }
+  &.m-notAviable{
+    color:$timeColor;
+    &:before{
+      background-color: #d5d5d5;
+      @include box-shadow(inset 0 1px 2px rgba(0,0,0,.35));
+      @include filter-gradient(#d5d5d5, #ebebeb, vertical);
+      @include background-image(linear-gradient(top, #d5d5d5, #ebebeb));
+    }
+    &:after{
+      content: '— нет в наличии';
+      display: block;
+    }
+  }
+}
+.similarProducts{margin:30px 0;}
+.similarProducts__title{margin-left: 30px; @include h2;}
+.similarProducts__item{@include standartProduct;}
+.similarProducts__item__name{}
+.similarProducts__item__price{@include standartProduct__price;}
+
+.product__description{@include customCss;margin-left:30px;}
+.product__description__image{
+  &.item-1{margin:15px 0;}
+  &.item-2{float: right;margin-top: -50px;}
+  &.item-3{position: relative;margin:20px 0;}
+}
+/*404 page specific elements styles
+------------------------------------------------------------------------------------------------*/
+.mistake404{margin:70px 0 150px 30px;}
+.mistake404__title{@include h1;}
+.mistake404__content{margin:10px 0;}
+.mistake404__search{
+  margin:10px 0;
+  position: relative;
+  input{
+    width: 375px;
+    padding: 0 10px 0 30px;
+    .ie7 &{width: 375px -40;}
+    height: 27px;
+    @include border-radius(13px);
+    background-color: #fff;
+    border: solid 1px $timeColor;
+    @include  single-transition(all,.4s,ease,0s);
+    &:active,&:focus{
+      outline: none;
+      //box-shadow: 0 0 10px #007ea2;
+      box-shadow: 0 0 10px #00a6d7;
+    }
+  }
+  button{
+    width:14px;
+    height: 18px;
+    @include icons-sprite(search);
+    position: absolute;
+    left:13px;
+    top:50%;
+    margin-top: -9px;
+    border: none;
+  }
+}
+/*plugins styles
+------------------------------------------------------------------------------------------------*/
+
+/*
+modificators styles
+*/
+.m-txtAligh_r{text-align: right;}
+////debug
+//* { outline: 2px dotted red; }
+//* * { outline: 2px dotted green; }
+//* * * { outline: 2px dotted orange; }
+//* * * * { outline: 2px dotted blue; }
+//* * * * * { outline: 1px solid red; }
+//* * * * * * { outline: 1px solid green; }
+//* * * * * * * { outline: 1px solid orange; }
+//* * * * * * * * { outline: 1px solid blue; }
