@@ -173,6 +173,30 @@ $ftrHeight:145px;
     vertical-align: top;
   }
 }
+.l-hList{@include hList;}
+//justify list mixin
+@mixin jList{
+  text-align: justify;
+  line-height: 0;
+  font-size: 1px;
+  text-justify: newspaper;
+  zoom:1;
+  text-align-last: justify;
+  &:after{
+    content: "";
+    display: inline-block;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 100%;
+  }
+  >*{
+    text-align: left;
+    @include inline-block;
+    line-height: $baseLineHeight;font-size: $baseFontSize;
+  }
+}
+.l-jList{@include jList;}
 //img wrapper
 @mixin imgWrap{
   img{width:100%;height: 100%;}
@@ -825,7 +849,7 @@ $indexSlider__height:285px;
   .slider__recommended__price{
     font-size: 1.5em;
     float: right;
-    padding:0 15px;
+    padding:5px 15px 0;
   }
 }
 
@@ -1189,9 +1213,74 @@ $indexSlider__height:285px;
 }
 /*plugins styles
 ------------------------------------------------------------------------------------------------*/
+/*overlay*/
+.b-loginForm {
+  display:none;
+  z-index:10000;
+  background-color:#fff;
+  width:600px;
+  min-height:300px;
+  position: fixed;
+  top:95px;
+  left:50%;
+  margin-left: -300px;
+  padding:30px 35px 10px;
+  @include border-radius(10px);
+  @include box-shadow(0 8px 15px rgba(88,142,160,.75));
+  .title{
+    @include h1;
+    font-size: 31px;
+    margin-left: 30px;
+  }
+  .registration_link{@include h2; color:$attentColor;}
+  .content{
+    border:1px solid #dcdcdc;
+    @include border-radius;
+    padding:0 30px;
+    margin: 15px 0 17px;
+  }
+  label{
+    display: block;
+    @include jList;
+    margin: 20px 0;
+  }
 
-/*
-modificators styles
+  /* styles for text  */  .label{@include h2;}
+  input{
+    height: 30px;
+    padding:0 10px;
+    font-family: $servFont;
+    color:#444;
+    width:220px;
+    &[type=email],&[type=text]{width:370px;}
+  }
+  .password_remind_link{margin-right: 0;}
+
+  button{@include button;margin-left: 130px;}
+  .social_label{margin:0 10px 0 15px;}
+  .social_button{
+    @include inline-block;
+    width:24px; height: 24px;
+    margin-right: 5px;
+  }
+  .social_button-1{@include icons-sprite(soc-1);}
+  .social_button-2{@include icons-sprite(soc-2);}
+  .social_button-3{@include icons-sprite(soc-3);width:26px; height: 22px;}
+}
+
+/* close button positioned on upper right corner */
+.simple_overlay .close {
+  display: none;
+  position:absolute;
+  right:-15px;
+  top:-15px;
+  cursor:pointer;
+  height:35px;
+  width:35px;
+}
+
+
+/*modificators styles
 */
 .m-txtAligh_r{text-align: right;}
 ////debug

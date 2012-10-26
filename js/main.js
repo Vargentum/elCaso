@@ -1,4 +1,11 @@
 $(function(){
+    $('a[rel]').overlay({
+        mask: {
+            color: '#ffffff',
+            loadSpeed: 400,
+            opacity: 0.6
+        }
+    });
     $('.slider').mobilyslider({
         content: '.slider__viewport',
         children: 'div',
@@ -39,3 +46,4 @@ $(function(){
         });
     });
 });
+

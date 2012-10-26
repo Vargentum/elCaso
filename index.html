@@ -8,12 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
     <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <!--CSS here-->
-    <link rel="stylesheet" href="stylesheets/default.css">
     <link rel="stylesheet" href="stylesheets/screen.css">
-
     <!--CSS here-->
     <script src="js/vendor/modernizr-2.6.1.min.js"></script>
 </head>
@@ -33,7 +30,7 @@
         </div>
         <!--user block-->
         <div class="b-user">
-            <a href="#" class="b-user__loginLink m-login_off">Вход и регистрация</a>
+            <a href="#" rel="#b-loginForm" class="b-user__loginLink m-login_off">Вход и регистрация</a>
             <a href="#" class="b-user__shopCartLink">
                 Корзина
                 <span class="b-user__shopCartLink__counter">(4)</span>
@@ -135,7 +132,7 @@
                         </ul>
                         <a href="#" class="slider__recommended">
                             <span class="slider__recommended__title">El Caso <span>рекомендует</span></span>
-                            <span class="slider__recommended__price">1 350 руб.</span>
+                            <span class="slider__recommended__price">21 350 руб.</span>
                         </a>
                     </div>
                 </div>
@@ -317,24 +314,36 @@
 </footer>
 <!-- END FOOTER -->
 
-
-<nav style="position: fixed;left:0; top:0; background: #fff; border-radius: 0 0 15px 0; padding:10px 20px 20px;">
-    <header style="font-size: 18px; padding-bottom: 10px;">Навигация</header>
-    <ul>
-        <li><a href="index.html">Главная</a></li>
-        <li><a href="catalog.html">Каталог</a></li>
-        <li><a href="cabinet.html">Кабинет</a></li>
-        <li><a href="product.html">Товар</a></li>
-        <li><a href="shopcart.html">Корзина</a></li>
-        <li><a href="404.html">404</a></li>
-    </ul>
-</nav>
+<form class="b-loginForm" id="b-loginForm">
+    <header class="l-jList">
+        <span class="title">Вход с паролем</span>
+        <a href="#" class="registration_link">регистрация</a>
+    </header>
+    <div class="content">
+        <label>
+            <span class="label">Эл. почта</span>
+            <input type="email">
+        </label>
+        <label>
+            <span class="label">Пароль</span>
+            <input type="password">
+            <a href="#" class="password_remind_link">Напомнить пароль</a>
+        </label>
+    </div>
+    <button type="submit">Войти</button>
+    <span class="social_label">или с помощью:</span>
+    <a href="#" class="social_button social_button-1 ir">Vkontakte</a>
+    <a href="#" class="social_button social_button-2 ir">Facebook</a>
+    <a href="#" class="social_button social_button-3 ir">Twitter</a>
+</form>
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.8.2.min.js"><\/script>')</script>
+<script src="http://cdn.jquerytools.org/1.2.7/all/jquery.tools.min.js"></script>
 <script src="js/vendor/jquery.columnizer.min.js"></script>
 <script src="js/plugins.js"></script>
+<!--<script src="js/mobilyslider.js"></script>-->
 <script src="js/main.js"></script>
 
 <!-- Asynchronous Google Analytics snippet. Change UA-XXXXX-X to be your site's ID.
