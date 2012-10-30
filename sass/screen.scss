@@ -723,9 +723,11 @@ button{border:none;@include single-transition(all,.4s,ease,0s);}
     @include icons-sprite(copy);
     display: block;
     height: 34px;
-    padding-left: 50px;
-    a{white-space: nowrap;}
-    sup{font-size: 0.786em;}
+    padding-top:33px;
+    color: #f71b41;
+    text-decoration: none;
+    span{text-decoration: underline;}
+    sup{font-size: 0.652em;margin-left:3px;}
   }
 //footer shop info
 .b-footerShopInfo{
